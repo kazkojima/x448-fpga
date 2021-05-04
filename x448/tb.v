@@ -6,8 +6,8 @@
 //`define test_multmod
 //`define test_divmod
 //`define test_point_add
-//`define test_scalarmultB
-`define test_scalarmult
+`define test_scalarmultB
+//`define test_scalarmult
 
 module testbench;
    reg clk;
