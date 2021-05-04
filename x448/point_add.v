@@ -109,9 +109,6 @@ module point_add(input clk,
    assign inv_in = z3;
 
    always @(posedge clk) begin
-   end
-
-   always @(posedge clk) begin
       if (rst) begin
 	 state <= S_IDLE;
 	 mul_res_ready <= 0;
