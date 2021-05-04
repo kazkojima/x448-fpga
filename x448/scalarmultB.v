@@ -49,7 +49,7 @@ module scalarmultB(input clk,
    reg pt_res_ready;
    reg pt_affine;
 
-   wire [448:0] x_precomp_data, y_precomp_data, t_precomp_data;
+   wire [447:0] x_precomp_data, y_precomp_data, t_precomp_data;
    wire [10:0] romaddr;
 
    point_add padd0(.clk(clk), .rst(rst),
