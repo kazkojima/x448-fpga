@@ -9,7 +9,7 @@
 `define impl_scalarmultB
 //`define impl_scalarmult
 
-module pll_12_36(input clki, output clko);
+module pll_12_48(input clki, output clko);
     (* ICP_CURRENT="12" *) (* LPF_RESISTOR="8" *) (* MFG_ENABLE_FILTEROPAMP="1" *) (* MFG_GMCREF_SEL="2" *)
     EHXPLLL #(
         .PLLRST_ENA("DISABLED"),
@@ -20,8 +20,8 @@ module pll_12_36(input clki, output clko);
         .CLKOP_CPHASE(11),
         .OUTDIVIDER_MUXA("DIVA"),
         .CLKOP_ENABLE("ENABLED"),
-        .CLKOP_DIV(12),
-        .CLKFB_DIV(18),
+        .CLKOP_DIV(16),
+        .CLKFB_DIV(24),
         .CLKI_DIV(6),
         .FEEDBK_PATH("CLKOP")
     ) pll_i (
@@ -55,7 +55,7 @@ module top(input wire clk,
 
    wire refclk;
 
-   pll_12_36 pll_inst(clk, refclk);
+   pll_12_48 pll_inst(clk, refclk);
 
 /*
    addmod addmod0(.a(448'd484559149530404593699549205258669689569094240458212040187660132787056912146709081364401144455726350866276831544947397859048262938744149),
@@ -154,9 +154,8 @@ module top(input wire clk,
 `endif
 
    assign led[7:0] = ~count;
-//   assign tp0 = &x3_out;
-   assign tp1 = res_valid;
-   assign tp2 = req_busy;
+   assign tp0 = res_valid;
+   assign tp1 = req_busy;
 
    always @(posedge refclk) begin
       if (rstn == 0) begin
