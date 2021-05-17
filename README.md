@@ -7,11 +7,11 @@ This is my trial of a verilog implementation of some operations on curve448. See
 * Point addition on the twisted Edwards curve - curve448. [3]
 * Scalar multiplication on the standard base point.
 
-The target FPGA is ECP5-85G and yosys/nextpnr-ecp5 open software developing system is assumed. All operations except scalar multiplication with a given base point are tested successfully on the real chip with 36Mhz clock.
+The target FPGA is ECP5-85G and yosys/nextpnr-ecp5 open software developing system is assumed. All operations ~~except scalar multiplication with a given base point~~ are tested successfully on the real chip with 48Mhz clock.
 
-The routing of the scalar multiplication circuit takes ~40 hours on my PC :-(
+~~The routing of the scalar multiplication circuit takes ~40 hours on my PC :-(~~
 
-scalarmult.v is a simple implementation of the scalar multiplication with a given base point, though its routing doesn't end successfully yet.
+scalarmult.v is a simple implementation of the scalar multiplication with a given base point~~, though its routing doesn't end successfully yet~~.
 
 
 ## Not secure
@@ -20,15 +20,27 @@ There are almost no countermeasures implemented against well-known attacks. See 
 
 ## Performance
 
-Testbench shows ~4740 cycles are needed to complete a point addition and ~189680 cycles for a scalar multiplication on the standard base point of which x-cordinate is -\sqrt{5}/3 (0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa955555555555555555555555555555555555555555555555555555555).
+Testbench shows ~4740 cycles are needed to complete a point addition and ~182780 cycles for a scalar multiplication on the standard base point of which x-cordinate is -\sqrt{5}/3 (0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa955555555555555555555555555555555555555555555555555555555). A scalar multiplication of the given arbitrary base points consumes ~1454530 cycles.
 
 ## Device utilisation for scalar multiplication on the standard base point
 
 ```
-Info: 	       TRELLIS_SLICE: 30458/41820    72%
+Info: 	       TRELLIS_SLICE: 28274/41820    67%
 Info: 	          TRELLIS_IO:    13/  365     3%
 Info: 	                DCCA:     1/   56     1%
 Info: 	              DP16KD:   150/  208    72%
+Info: 	          MULT18X18D:     0/  156     0%
+Info: 	              ALU54B:     0/   78     0%
+Info: 	             EHXPLLL:     1/    4    25%
+```
+
+For scalar multiplication on the given arbitrary base point
+
+```
+Info: 	       TRELLIS_SLICE: 36486/41820    87%
+Info: 	          TRELLIS_IO:    13/  365     3%
+Info: 	                DCCA:     1/   56     1%
+Info: 	              DP16KD:     0/  208     0%
 Info: 	          MULT18X18D:     0/  156     0%
 Info: 	              ALU54B:     0/   78     0%
 Info: 	             EHXPLLL:     1/    4    25%
