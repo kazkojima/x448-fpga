@@ -44,10 +44,10 @@ sim: tb.vvp
 	gtkwave testbench.vcd soc.gtkw
 
 %_ecp5.json: %.v $(X448_RTL)
-	yosys -Q $(QUIET) -p 'synth_ecp5 -top $(subst .v,,$<) -json $@' $^
+	yosys -Q $(QUIET) -p 'synth_ecp5 -nomux -top $(subst .v,,$<) -json $@' $^
 
 %_ecp5.txtcfg: %_ecp5.json
-	nextpnr-ecp5 $(QUIET) --ignore-loops --placer heap --$(DEVICE) --package $(PACKAGE) --lpf $(PINCONSTRAINTS) --json $< --textcfg $@
+	nextpnr-ecp5 $(QUIET) --ignore-loops --timing-allow-fail --placer heap --$(DEVICE) --package $(PACKAGE) --lpf $(PINCONSTRAINTS) --json $< --textcfg $@
 
 %_ecp5.svf: %_ecp5.txtcfg
 	ecppack --svf $@ $<
