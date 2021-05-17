@@ -9,9 +9,7 @@ This is my trial of a verilog implementation of some operations on curve448. See
 
 The target FPGA is ECP5-85G and yosys/nextpnr-ecp5 open software developing system is assumed. All operations ~~except scalar multiplication with a given base point~~ are tested successfully on the real chip with 48Mhz clock.
 
-~~The routing of the scalar multiplication circuit takes ~40 hours on my PC :-(~~
-
-scalarmult.v is a simple implementation of the scalar multiplication with a given base point~~, though its routing doesn't end successfully yet~~.
+scalarmult.v is a simple implementation of the scalar multiplication with a given base point.
 
 
 ## Not secure
