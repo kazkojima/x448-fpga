@@ -72,8 +72,8 @@ module point_add(input clk,
    // e=r1, f=r2, g=r3, h=r4, i=ri
 
    reg [4:0] state;
-   reg [1:0] m_state;
-   reg [1:0] op_state;
+   reg m_state;
+   reg op_state;
 
    localparam S_IDLE = 0;
    localparam S_ACK = 1;
@@ -103,8 +103,8 @@ module point_add(input clk,
    localparam O_INIT = 0;
    localparam O_OK = 1;
 
-   localparam M_INIT = 1;
-   localparam M_WAIT = 2;
+   localparam M_INIT = 0;
+   localparam M_WAIT = 1;
 
    assign inv_in = z3;
 
